@@ -10,14 +10,35 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AlertsRouteImport } from './routes/alerts'
+import { Route as ConfirmationRouteImport } from './routes/confirmation'
+import { Route as HelpRouteImport } from './routes/help'
 import { Route as OptionsRouteImport } from './routes/options'
 import { Route as PlanRouteImport } from './routes/plan'
+import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as ReviewRouteImport } from './routes/review'
+import { Route as StationRouteImport } from './routes/station'
+import { Route as TripsRouteImport } from './routes/trips'
 import { Route as ApiTranscribeRouteImport } from './routes/api.transcribe'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AlertsRoute = AlertsRouteImport.update({
+  id: '/alerts',
+  path: '/alerts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConfirmationRoute = ConfirmationRouteImport.update({
+  id: '/confirmation',
+  path: '/confirmation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HelpRoute = HelpRouteImport.update({
+  id: '/help',
+  path: '/help',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OptionsRoute = OptionsRouteImport.update({
@@ -30,9 +51,24 @@ const PlanRoute = PlanRouteImport.update({
   path: '/plan',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProfileRoute = ProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ReviewRoute = ReviewRouteImport.update({
   id: '/review',
   path: '/review',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StationRoute = StationRouteImport.update({
+  id: '/station',
+  path: '/station',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TripsRoute = TripsRouteImport.update({
+  id: '/trips',
+  path: '/trips',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiTranscribeRoute = ApiTranscribeRouteImport.update({
@@ -43,39 +79,97 @@ const ApiTranscribeRoute = ApiTranscribeRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/alerts': typeof AlertsRoute
+  '/confirmation': typeof ConfirmationRoute
+  '/help': typeof HelpRoute
   '/options': typeof OptionsRoute
   '/plan': typeof PlanRoute
+  '/profile': typeof ProfileRoute
   '/review': typeof ReviewRoute
+  '/station': typeof StationRoute
+  '/trips': typeof TripsRoute
   '/api/transcribe': typeof ApiTranscribeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/alerts': typeof AlertsRoute
+  '/confirmation': typeof ConfirmationRoute
+  '/help': typeof HelpRoute
   '/options': typeof OptionsRoute
   '/plan': typeof PlanRoute
+  '/profile': typeof ProfileRoute
   '/review': typeof ReviewRoute
+  '/station': typeof StationRoute
+  '/trips': typeof TripsRoute
   '/api/transcribe': typeof ApiTranscribeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/alerts': typeof AlertsRoute
+  '/confirmation': typeof ConfirmationRoute
+  '/help': typeof HelpRoute
   '/options': typeof OptionsRoute
   '/plan': typeof PlanRoute
+  '/profile': typeof ProfileRoute
   '/review': typeof ReviewRoute
+  '/station': typeof StationRoute
+  '/trips': typeof TripsRoute
   '/api/transcribe': typeof ApiTranscribeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/options' | '/plan' | '/review' | '/api/transcribe'
+  fullPaths:
+    | '/'
+    | '/alerts'
+    | '/confirmation'
+    | '/help'
+    | '/options'
+    | '/plan'
+    | '/profile'
+    | '/review'
+    | '/station'
+    | '/trips'
+    | '/api/transcribe'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/options' | '/plan' | '/review' | '/api/transcribe'
-  id: '__root__' | '/' | '/options' | '/plan' | '/review' | '/api/transcribe'
+  to:
+    | '/'
+    | '/alerts'
+    | '/confirmation'
+    | '/help'
+    | '/options'
+    | '/plan'
+    | '/profile'
+    | '/review'
+    | '/station'
+    | '/trips'
+    | '/api/transcribe'
+  id:
+    | '__root__'
+    | '/'
+    | '/alerts'
+    | '/confirmation'
+    | '/help'
+    | '/options'
+    | '/plan'
+    | '/profile'
+    | '/review'
+    | '/station'
+    | '/trips'
+    | '/api/transcribe'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AlertsRoute: typeof AlertsRoute
+  ConfirmationRoute: typeof ConfirmationRoute
+  HelpRoute: typeof HelpRoute
   OptionsRoute: typeof OptionsRoute
   PlanRoute: typeof PlanRoute
+  ProfileRoute: typeof ProfileRoute
   ReviewRoute: typeof ReviewRoute
+  StationRoute: typeof StationRoute
+  TripsRoute: typeof TripsRoute
   ApiTranscribeRoute: typeof ApiTranscribeRoute
 }
 
@@ -86,6 +180,27 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/alerts': {
+      id: '/alerts'
+      path: '/alerts'
+      fullPath: '/alerts'
+      preLoaderRoute: typeof AlertsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/confirmation': {
+      id: '/confirmation'
+      path: '/confirmation'
+      fullPath: '/confirmation'
+      preLoaderRoute: typeof ConfirmationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/help': {
+      id: '/help'
+      path: '/help'
+      fullPath: '/help'
+      preLoaderRoute: typeof HelpRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/options': {
@@ -102,11 +217,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PlanRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/review': {
       id: '/review'
       path: '/review'
       fullPath: '/review'
       preLoaderRoute: typeof ReviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/station': {
+      id: '/station'
+      path: '/station'
+      fullPath: '/station'
+      preLoaderRoute: typeof StationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/trips': {
+      id: '/trips'
+      path: '/trips'
+      fullPath: '/trips'
+      preLoaderRoute: typeof TripsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/transcribe': {
@@ -121,9 +257,15 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AlertsRoute: AlertsRoute,
+  ConfirmationRoute: ConfirmationRoute,
+  HelpRoute: HelpRoute,
   OptionsRoute: OptionsRoute,
   PlanRoute: PlanRoute,
+  ProfileRoute: ProfileRoute,
   ReviewRoute: ReviewRoute,
+  StationRoute: StationRoute,
+  TripsRoute: TripsRoute,
   ApiTranscribeRoute: ApiTranscribeRoute,
 }
 export const routeTree = rootRouteImport
