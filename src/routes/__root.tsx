@@ -10,6 +10,8 @@ import {
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
+import { JourneyProvider } from "@/components/rail/journey-context";
+import { RailShell } from "@/components/rail/shell";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
@@ -78,21 +80,22 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "RailSaathi — Your Railway Companion" },
+      { name: "description", content: "Plan your train journey with RailSaathi, your multilingual railway companion." },
+      
+      { property: "og:title", content: "RailSaathi" },
+      { property: "og:description", content: "Plan your train journey with RailSaathi, your multilingual railway companion." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
+      
     ],
     links: [
       {
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Roboto+Condensed:wght@400;500;600;700&display=swap" },
     ],
   }),
   shellComponent: RootShell,
@@ -120,8 +123,8 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      {/* Required: nested routes render here. Removing <JourneyProvider><RailShell><Outlet /></RailShell></JourneyProvider> breaks all child routes. */}
+      <JourneyProvider><RailShell><Outlet /></RailShell></JourneyProvider>
     </QueryClientProvider>
   );
 }
