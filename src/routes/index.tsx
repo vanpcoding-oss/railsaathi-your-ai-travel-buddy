@@ -1,24 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
-
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
-export const Route = createFileRoute("/")({
-  component: Index,
-});
-
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
-}
+import {createFileRoute, Link} from '@tanstack/react-router';
+import {TrainFront, MapPin, Accessibility, CircleHelp, ArrowRight, ChevronRight} from 'lucide-react';
+import hero from '@/assets/station-hero.jpg';
+import {Button} from '@/components/ui/button';
+import {useJourney} from '@/components/rail/journey-context';
+import {pageHead} from '@/lib/metadata';
+export const Route=createFileRoute('/')({head:()=>pageHead('Dashboard','Plan, navigate and travel with confidence across Indian Railways.'),component:Dashboard});
+function Dashboard(){const {journey,setJourney,language}=useJourney();return <div className="screen-body"><div className="hero-scene"><img src={hero} alt="A passenger train at Chennai Central railway station" width={1536} height={1024}/><div className="hero-copy"><h1>{language==='ta'?'வணக்கம்,':'Hello,'}</h1><p>Plan, navigate and travel with confidence across Indian Railways.</p></div></div><div className="plan-action"><div><h2>Plan Your Journey</h2><p>Tell us where you want to go.<br/>Our AI will handle the rest.</p></div><Button asChild size="icon" className="round-arrow"><Link to="/plan" aria-label="Plan your journey"><ArrowRight/></Link></Button></div><div className="quick-grid"><Link to="/alerts" className="quick-link"><span className="icon-well"><TrainFront/></span>Live Train<br/>Updates</Link><Link to="/station" className="quick-link"><span className="icon-well"><MapPin/></span>Station<br/>Navigation</Link><Link to="/help" search={{topic:'accessibility'}} className="quick-link"><span className="icon-well"><Accessibility/></span>Accessible<br/>Travel</Link><Link to="/help" className="quick-link"><span className="icon-well"><CircleHelp/></span>Help &<br/>Assistance</Link></div><section><div className="section-header"><h2>Popular Routes</h2><Button asChild variant="secondary" size="sm"><Link to="/plan">View All</Link></Button></div><div className="route-list">{['Bengaluru','Coimbatore','Madurai','Tiruchirappalli'].map(city=><Link key={city} to="/plan" className="route-link" onClick={()=>setJourney({...journey,origin:'Chennai',destination:city})}><TrainFront size={18}/><span>Chennai → {city}</span><ChevronRight/></Link>)}</div></section><p className="app-footer-note">Your journey. Your language. Your RailSaathi.</p></div>}
