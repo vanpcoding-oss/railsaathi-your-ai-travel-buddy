@@ -1,0 +1,2 @@
+import {describe,it,expect} from 'vitest';import {sortTrains,trains} from '@/lib/journey';
+describe('Reference journey rules',()=>{it('ranks the ₹320 journey cheapest',()=>{expect(sortTrains('Cheapest')[0].price).toBe(320);});it('ranks the 4h 30m journey fastest',()=>{expect(sortTrains('Fastest')[0].minutes).toBe(270);});it('preserves Karnataka Express reference fare ₹480',()=>{expect(trains.find(t=>t.id==='12627')?.price).toBe(480);});});
